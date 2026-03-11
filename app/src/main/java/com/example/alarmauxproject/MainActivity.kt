@@ -17,7 +17,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             AlarmaUxProjectTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    AlarmScreen(modifier = Modifier.padding(innerPadding))
+//                    AlarmScreen(modifier = Modifier.padding(innerPadding))
+                    GodJobScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
