@@ -57,7 +57,7 @@ object AlarmColors {
 }
 
 @Composable
-fun AlarmScreen(modifier: Modifier = Modifier) {
+fun AlarmScreen(modifier: Modifier = Modifier, onUnlock: () -> Unit = {}) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -80,7 +80,8 @@ fun AlarmScreen(modifier: Modifier = Modifier) {
         UnlockBar(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 16.dp)
+                .padding(vertical = 16.dp),
+            onUnlock = onUnlock
         )
         Text(
             text = "Posponer (2 Backups)",
