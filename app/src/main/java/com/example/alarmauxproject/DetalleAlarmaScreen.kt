@@ -52,7 +52,8 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun DetalleAlarmaScreen(
-    onBack: () -> Unit = {}
+    onBack: () -> Unit = {},
+    onProbarAlarma: () -> Unit = {}
 ) {
     var alarmEnabled by remember { mutableStateOf(true) }
     val scrollState = rememberScrollState()
@@ -101,6 +102,7 @@ fun DetalleAlarmaScreen(
                 .padding(horizontal = 20.dp)
                 .clip(RoundedCornerShape(6.dp))
                 .background(AlarmColors.White)
+                .clickable { onProbarAlarma() }
                 .padding(horizontal = 8.dp, vertical = 4.dp)
                 .align(Alignment.CenterHorizontally),
             verticalAlignment = Alignment.CenterVertically
