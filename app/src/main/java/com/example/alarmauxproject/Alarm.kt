@@ -28,8 +28,6 @@ import kotlinx.coroutines.delay
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.VolumeUp
-import androidx.compose.material.icons.filled.Vibration
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Surface
@@ -39,8 +37,10 @@ import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.automirrored.outlined.VolumeUp
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.DoubleArrow
+import androidx.compose.material.icons.outlined.Vibration
 import androidx.compose.runtime.rememberCoroutineScope
 import kotlinx.coroutines.launch
 import androidx.compose.ui.unit.IntOffset
@@ -142,7 +142,7 @@ fun TimeCard() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    imageVector = Icons.Filled.Vibration,
+                    imageVector = Icons.Outlined.Vibration,
                     contentDescription = "Vibración",
                     tint = AlarmColors.Clock80
                 )
@@ -165,7 +165,7 @@ fun TimeCard() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    imageVector = Icons.AutoMirrored.Filled.VolumeUp,
+                    imageVector = Icons.AutoMirrored.Outlined.VolumeUp,
                     contentDescription = "Volumen",
                     tint = AlarmColors.Clock80
                 )

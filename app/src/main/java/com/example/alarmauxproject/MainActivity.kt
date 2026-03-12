@@ -19,6 +19,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 //                    AlarmScreen(modifier = Modifier.padding(innerPadding))
                     GodJobScreen(modifier = Modifier.padding(innerPadding))
+//                    QRScanScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }

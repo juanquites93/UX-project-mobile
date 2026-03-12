@@ -19,17 +19,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.WorkspacePremium
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.filled.MoreTime
-import androidx.compose.material.icons.filled.WbSunny
 import androidx.compose.material.icons.filled.WbTwilight
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material.icons.filled.DoubleArrow
-import androidx.compose.material.icons.filled.FormatQuote
+import androidx.compose.material.icons.outlined.FormatQuote
+import androidx.compose.material.icons.outlined.WbSunny
+import androidx.compose.material.icons.outlined.WorkspacePremium
 
 @Composable
 fun GodJobScreen(modifier: Modifier = Modifier) {
@@ -123,7 +123,7 @@ fun StrikeCard() {
                             horizontalArrangement = Arrangement.Center
                         ) {
                             Icon(
-                                imageVector = Icons.Filled.WorkspacePremium,
+                                imageVector = Icons.Outlined.WorkspacePremium,
                                 contentDescription = "Racha",
                                 tint = AlarmColors.Clock100
                             )
@@ -245,7 +245,7 @@ fun DayInfoCard() {
                                     modifier = Modifier.padding(end = 8.dp)
                                 )
                                 Icon(
-                                    imageVector = Icons.Filled.WbSunny,
+                                    imageVector = Icons.Outlined.WbSunny,
                                     contentDescription = "Sol",
                                     tint = AlarmColors.Clock100
                                 )
@@ -313,7 +313,7 @@ fun DailyMessageCard() {
             verticalArrangement = Arrangement.Center
         ) {
             Icon(
-                imageVector = Icons.Filled.FormatQuote,
+                imageVector = Icons.Outlined.FormatQuote,
                 contentDescription = "Quote",
                 tint = AlarmColors.Clock100
             )
