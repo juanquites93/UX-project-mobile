@@ -3,91 +3,122 @@ package com.example.alarmauxproject
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.layout.Row
-import androidx.compose.material3.Icon
-import androidx.compose.material.icons.Icons
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DoubleArrow
 import androidx.compose.material.icons.filled.MoreTime
 import androidx.compose.material.icons.filled.WbTwilight
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.material.icons.filled.DoubleArrow
 import androidx.compose.material.icons.outlined.FormatQuote
 import androidx.compose.material.icons.outlined.WbSunny
 import androidx.compose.material.icons.outlined.WorkspacePremium
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ProgressIndicatorDefaults
+import androidx.compose.material3.Shapes
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun GodJobScreen(modifier: Modifier = Modifier, onComenzarDia: () -> Unit = {}) {
-    Column(
+    BoxWithConstraints(
         modifier = modifier
             .fillMaxSize()
             .background(AlarmColors.Clock80)
-            .padding(24.dp),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = "!Bien hecho!",
-            style = MaterialTheme.typography.headlineMedium.copy(color = AlarmColors.White),
-            modifier = Modifier.padding(bottom = 32.dp)
-        )
-        Text(
-            text = "Despertaste en el segundo intento",
-            style = MaterialTheme.typography.bodyLarge.copy(color = AlarmColors.Clock20),
-            modifier = Modifier.padding(bottom = 32.dp)
-        )
-        StrikeCard()
-        Spacer(modifier = Modifier.height(16.dp))
-        DayInfoCard()
-        Spacer(modifier = Modifier.height(16.dp))
-        DailyMessageCard()
-        Spacer(modifier = Modifier.height(24.dp))
-        Button(
-            onClick = { onComenzarDia() },
+        val vh = maxHeight
+        // Scale factor: 1.0 on 800dp+ screens, shrinks proportionally on smaller
+        val ts = (maxHeight.value / 800f).coerceIn(0.65f, 1f)
+
+        Column(
             modifier = Modifier
-                .width(280.dp)
-                .height(96.dp),
-            colors = androidx.compose.material3.ButtonDefaults.buttonColors(
-                containerColor = AlarmColors.Clock40
-            ),
-            elevation = androidx.compose.material3.ButtonDefaults.buttonElevation(defaultElevation = 3.dp),
-            shape = androidx.compose.material3.Shapes().extraLarge
+                .fillMaxSize()
+                .padding(horizontal = 24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(modifier = Modifier.height(vh * 0.03f))
+
             Text(
-                text = "Comenzar día",
-                style = MaterialTheme.typography.headlineSmall.copy(color = AlarmColors.Clock100)
+                text = "!Bien hecho!",
+                color = AlarmColors.White,
+                fontSize = (28 * ts).sp,
+                modifier = Modifier.padding(bottom = vh * 0.015f)
             )
-            Icon(
-                imageVector = Icons.Filled.DoubleArrow,
-                contentDescription = "Row",
-                tint = AlarmColors.Clock100,
-                modifier = Modifier.padding(start = 8.dp)
+            Text(
+                text = "Despertaste en el segundo intento",
+                color = AlarmColors.Clock20,
+                fontSize = (16 * ts).sp,
+                modifier = Modifier.padding(bottom = vh * 0.02f)
             )
+
+            // Strike card
+            StrikeCard(cardHeight = vh * 0.18f, ts = ts)
+
+            Spacer(modifier = Modifier.height(vh * 0.012f))
+
+            // Day info card
+            DayInfoCard(cardHeight = vh * 0.2f, infoCardHeight = vh * 0.09f, ts = ts)
+
+            Spacer(modifier = Modifier.height(vh * 0.012f))
+
+            // Daily message card
+            DailyMessageCard(cardHeight = vh * 0.17f, ts = ts)
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            // Comenzar día button
+            Button(
+                onClick = { onComenzarDia() },
+                modifier = Modifier
+                    .fillMaxWidth(0.7f)
+                    .height(vh * 0.09f),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = AlarmColors.Clock40
+                ),
+                elevation = ButtonDefaults.buttonElevation(defaultElevation = 3.dp),
+                shape = Shapes().extraLarge
+            ) {
+                Text(
+                    text = "Comenzar día",
+                    color = AlarmColors.Clock100,
+                    fontSize = (20 * ts).sp
+                )
+                Icon(
+                    imageVector = Icons.Filled.DoubleArrow,
+                    contentDescription = "Row",
+                    tint = AlarmColors.Clock100,
+                    modifier = Modifier.padding(start = 8.dp)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(vh * 0.02f))
         }
     }
 }
 
 @Composable
-fun StrikeCard() {
+fun StrikeCard(cardHeight: Dp = 200.dp, ts: Float = 1f) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(200.dp),
+            .height(cardHeight),
         colors = CardDefaults.cardColors(
             containerColor = AlarmColors.Clock20
         )
@@ -100,15 +131,14 @@ fun StrikeCard() {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 16.dp, bottom = 16.dp),
+                    .padding(vertical = 8.dp),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Card(
                     modifier = Modifier
-                        .width(289.dp)
-                        .height(36.dp)
-                        .align(Alignment.CenterVertically),
+                        .fillMaxWidth(0.8f)
+                        .height(36.dp),
                     colors = CardDefaults.cardColors(
                         containerColor = AlarmColors.Clock40
                     ),
@@ -129,7 +159,8 @@ fun StrikeCard() {
                             )
                             Text(
                                 text = "Racha actual 13 días",
-                                style = MaterialTheme.typography.headlineSmall.copy(color = AlarmColors.Clock100),
+                                color = AlarmColors.Clock100,
+                                fontSize = (18 * ts).sp,
                                 modifier = Modifier.padding(start = 8.dp)
                             )
                         }
@@ -140,7 +171,7 @@ fun StrikeCard() {
                 progress = { 0.80f },
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
-                    .padding(vertical = 16.dp)
+                    .padding(vertical = 8.dp)
                     .height(7.dp),
                 color = AlarmColors.Clock80,
                 trackColor = AlarmColors.White,
@@ -148,20 +179,19 @@ fun StrikeCard() {
             )
             Text(
                 text = "¡Sigue así!",
-                style = MaterialTheme.typography.headlineSmall.copy(color = AlarmColors.Clock100)
+                color = AlarmColors.Clock100,
+                fontSize = (20 * ts).sp
             )
         }
     }
-
-
 }
 
 @Composable
-fun DayInfoCard() {
+fun DayInfoCard(cardHeight: Dp = 200.dp, infoCardHeight: Dp = 100.dp, ts: Float = 1f) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(200.dp),
+            .height(cardHeight),
         colors = CardDefaults.cardColors(
             containerColor = AlarmColors.Clock20
         )
@@ -174,15 +204,14 @@ fun DayInfoCard() {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 24.dp, bottom = 16.dp),
+                    .padding(top = 8.dp, bottom = 6.dp),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Card(
                     modifier = Modifier
-                        .width(289.dp)
-                        .height(36.dp)
-                        .align(Alignment.CenterVertically),
+                        .fillMaxWidth(0.8f)
+                        .height(36.dp),
                     colors = CardDefaults.cardColors(
                         containerColor = AlarmColors.Clock40
                     ),
@@ -203,7 +232,8 @@ fun DayInfoCard() {
                             )
                             Text(
                                 text = "Tu mañana",
-                                style = MaterialTheme.typography.headlineSmall.copy(color = AlarmColors.Clock100),
+                                color = AlarmColors.Clock100,
+                                fontSize = (18 * ts).sp,
                                 modifier = Modifier.padding(start = 8.dp)
                             )
                         }
@@ -213,15 +243,14 @@ fun DayInfoCard() {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 16.dp, bottom = 24.dp),
-                horizontalArrangement = Arrangement.Center,
+                    .padding(horizontal = 16.dp, vertical = 6.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Card(
                     modifier = Modifier
-                        .width(140.dp)
-                        .height(100.dp)
-                        .align(Alignment.CenterVertically),
+                        .weight(1f)
+                        .height(infoCardHeight),
                     colors = CardDefaults.cardColors(
                         containerColor = AlarmColors.Clock40
                     )
@@ -233,7 +262,8 @@ fun DayInfoCard() {
                         Column {
                             Text(
                                 text = "CLIMA",
-                                style = MaterialTheme.typography.headlineSmall.copy(color = AlarmColors.Clock100)
+                                color = AlarmColors.Clock100,
+                                fontSize = (18 * ts).sp
                             )
                             Row(
                                 verticalAlignment = Alignment.CenterVertically,
@@ -241,7 +271,8 @@ fun DayInfoCard() {
                             ) {
                                 Text(
                                     text = "22° Soleado",
-                                    style = MaterialTheme.typography.bodyLarge.copy(color = AlarmColors.Clock80),
+                                    color = AlarmColors.Clock80,
+                                    fontSize = (14 * ts).sp,
                                     modifier = Modifier.padding(end = 8.dp)
                                 )
                                 Icon(
@@ -251,15 +282,12 @@ fun DayInfoCard() {
                                 )
                             }
                         }
-
                     }
                 }
-                Spacer(modifier = Modifier.width(16.dp))
                 Card(
                     modifier = Modifier
-                        .width(140.dp)
-                        .height(100.dp)
-                        .align(Alignment.CenterVertically),
+                        .weight(1f)
+                        .height(infoCardHeight),
                     colors = CardDefaults.cardColors(
                         containerColor = AlarmColors.Clock40
                     )
@@ -271,7 +299,8 @@ fun DayInfoCard() {
                         Column {
                             Text(
                                 text = "SUEÑO",
-                                style = MaterialTheme.typography.headlineSmall.copy(color = AlarmColors.Clock100)
+                                color = AlarmColors.Clock100,
+                                fontSize = (18 * ts).sp
                             )
                             Row(
                                 verticalAlignment = Alignment.CenterVertically,
@@ -279,7 +308,8 @@ fun DayInfoCard() {
                             ) {
                                 Text(
                                     text = "7.5 h",
-                                    style = MaterialTheme.typography.bodyLarge.copy(color = AlarmColors.Clock80),
+                                    color = AlarmColors.Clock80,
+                                    fontSize = (14 * ts).sp,
                                     modifier = Modifier.padding(end = 8.dp)
                                 )
                                 Icon(
@@ -289,7 +319,6 @@ fun DayInfoCard() {
                                 )
                             }
                         }
-
                     }
                 }
             }
@@ -298,18 +327,19 @@ fun DayInfoCard() {
 }
 
 @Composable
-fun DailyMessageCard() {
+fun DailyMessageCard(cardHeight: Dp = 120.dp, ts: Float = 1f) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(120.dp),
+            .height(cardHeight),
         colors = CardDefaults.cardColors(
             containerColor = AlarmColors.Clock20
         )
     ) {
         Column(
-            modifier = Modifier.fillMaxSize()
-                .padding(16.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(12.dp),
             verticalArrangement = Arrangement.Center
         ) {
             Icon(
@@ -319,13 +349,13 @@ fun DailyMessageCard() {
             )
             Text(
                 text = "Mensaje del día",
-                style = MaterialTheme.typography.headlineSmall.copy(color = AlarmColors.Clock100),
-                modifier = Modifier.padding(end = 8.dp)
+                color = AlarmColors.Clock100,
+                fontSize = (18 * ts).sp
             )
             Text(
                 text = "La mejor manera de predecir el futuro es crearlo",
-                style = MaterialTheme.typography.bodyMedium.copy(color = AlarmColors.Clock80),
-                modifier = Modifier.padding(end = 8.dp)
+                color = AlarmColors.Clock80,
+                fontSize = (13 * ts).sp
             )
         }
     }

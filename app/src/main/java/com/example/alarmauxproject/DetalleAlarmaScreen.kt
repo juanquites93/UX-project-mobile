@@ -308,11 +308,11 @@ fun DetalleAlarmaScreen(
             // Challenge pills
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally)
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                ChallengePill(icon = Icons.Filled.Functions, label = "Mates")
-                ChallengePill(icon = Icons.Filled.QrCode2, label = "Escaneo")
-                ChallengePill(icon = Icons.AutoMirrored.Filled.DirectionsWalk, label = "Caminar")
+                ChallengePill(modifier = Modifier.weight(1f), icon = Icons.Filled.Functions, label = "Mates")
+                ChallengePill(modifier = Modifier.weight(1f), icon = Icons.Filled.QrCode2, label = "Escaneo")
+                ChallengePill(modifier = Modifier.weight(1f), icon = Icons.AutoMirrored.Filled.DirectionsWalk, label = "Caminar")
             }
         }
 
@@ -413,12 +413,12 @@ fun SettingDivider() {
 
 @Composable
 fun ChallengePill(
+    modifier: Modifier = Modifier,
     icon: ImageVector,
     label: String
 ) {
     Column(
-        modifier = Modifier
-            .width(95.dp)
+        modifier = modifier
             .height(81.dp)
             .clip(RoundedCornerShape(32.dp))
             .background(AlarmColors.Clock60)

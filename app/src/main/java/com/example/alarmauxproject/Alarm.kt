@@ -42,6 +42,8 @@ import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.DoubleArrow
 import androidx.compose.material.icons.outlined.Vibration
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import kotlinx.coroutines.launch
 import androidx.compose.ui.unit.IntOffset
 
@@ -193,13 +195,17 @@ fun UnlockBar(
     val textColor = AlarmColors.Clock80
     val iconColor = AlarmColors.Clock100
     val scope = rememberCoroutineScope()
-    val maxOffset = 800f
+    val density = LocalDensity.current
+    var barWidthPx by remember { mutableStateOf(0f) }
+    val circleSizePx = with(density) { circleSize.toPx() }
+    val maxOffset = (barWidthPx - circleSizePx - with(density) { 8.dp.toPx() }).coerceAtLeast(0f)
     val offsetX = remember { Animatable(20f) }
     Box(
         modifier = modifier
             .fillMaxWidth()
             .height(barHeight)
             .background(barColor, shape = CircleShape)
+            .onGloballyPositioned { barWidthPx = it.size.width.toFloat() }
     ) {
         Row(
             modifier = Modifier.align(Alignment.Center),
