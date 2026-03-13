@@ -32,7 +32,7 @@ import androidx.compose.material.icons.outlined.WbSunny
 import androidx.compose.material.icons.outlined.WorkspacePremium
 
 @Composable
-fun GodJobScreen(modifier: Modifier = Modifier) {
+fun GodJobScreen(modifier: Modifier = Modifier, onComenzarDia: () -> Unit = {}) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -58,7 +58,7 @@ fun GodJobScreen(modifier: Modifier = Modifier) {
         DailyMessageCard()
         Spacer(modifier = Modifier.height(24.dp))
         Button(
-            onClick = {  },
+            onClick = { onComenzarDia() },
             modifier = Modifier
                 .width(280.dp)
                 .height(96.dp),

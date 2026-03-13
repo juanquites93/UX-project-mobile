@@ -28,7 +28,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.outlined.FiberManualRecord
 import androidx.compose.material.icons.outlined.FlashlightOn
-import androidx.compose.material.icons.outlined.Star
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.LoadingIndicator
 
 @Composable
 fun QRScanScreen(
@@ -164,6 +165,7 @@ fun LanternButtonCard() {
     }
 }
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun ChallengeCompleteCard(onCompleted: () -> Unit = {}) {
     Card(
@@ -190,10 +192,9 @@ fun ChallengeCompleteCard(onCompleted: () -> Unit = {}) {
                     style = MaterialTheme.typography.bodyLarge.copy(color = AlarmColors.White),
                     modifier = Modifier.padding(end = 8.dp)
                 )
-                Icon(
-                    imageVector = Icons.Outlined.Star,
-                    contentDescription = "Burst",
-                    tint = AlarmColors.White
+                LoadingIndicator(
+                    modifier = Modifier.size(24.dp),
+                    color = AlarmColors.White
                 )
             }
         }

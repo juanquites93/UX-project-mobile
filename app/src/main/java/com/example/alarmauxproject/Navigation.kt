@@ -129,7 +129,13 @@ fun AppNavHost(
 
         // 10. God Job (pantalla final)
         composable(Routes.GOD_JOB) {
-            GodJobScreen()
+            GodJobScreen(
+                onComenzarDia = {
+                    navController.navigate(Routes.MIS_ALARMAS) {
+                        popUpTo(Routes.MIS_ALARMAS) { inclusive = true }
+                    }
+                }
+            )
         }
     }
 }

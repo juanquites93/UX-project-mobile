@@ -20,16 +20,18 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.DirectionsWalk
-import androidx.compose.material.icons.filled.Calculate
-import androidx.compose.material.icons.filled.CameraAlt
-import androidx.compose.material.icons.filled.DarkMode
-import androidx.compose.material.icons.filled.GraphicEq
-import androidx.compose.material.icons.filled.MusicNote
+import androidx.compose.material.icons.filled.CalendarToday
+import androidx.compose.material.icons.filled.Functions
+import androidx.compose.material.icons.filled.Lightbulb
 import androidx.compose.material.icons.filled.Pause
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Psychology
+import androidx.compose.material.icons.filled.QrCode2
+import androidx.compose.material.icons.filled.Shield
+import androidx.compose.material.icons.filled.ShowChart
 import androidx.compose.material.icons.filled.Vibration
 import androidx.compose.material.icons.automirrored.filled.VolumeUp
-import androidx.compose.material.icons.filled.Work
 import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -164,8 +166,8 @@ fun DetalleAlarmaScreen(
             Row(
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                TagChip(icon = Icons.Filled.Work, text = "Lun - Vie")
-                TagChip(icon = Icons.Filled.GraphicEq, text = "Perfil: Solo")
+                TagChip(icon = Icons.Filled.CalendarToday, text = "Lun - Vie")
+                TagChip(icon = Icons.Filled.Person, text = "Perfil: Solo")
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -185,7 +187,7 @@ fun DetalleAlarmaScreen(
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
-                        imageVector = Icons.Filled.Work,
+                        imageVector = Icons.Filled.Shield,
                         contentDescription = null,
                         tint = AlarmColors.Clock80,
                         modifier = Modifier.size(14.dp)
@@ -218,7 +220,8 @@ fun DetalleAlarmaScreen(
             Text(
                 text = "Tipo de despertar",
                 color = AlarmColors.White,
-                fontSize = 14.sp
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Medium
             )
             Box(
                 modifier = Modifier
@@ -245,13 +248,13 @@ fun DetalleAlarmaScreen(
                 .background(AlarmColors.Clock20)
                 .padding(16.dp)
         ) {
-            SettingRow(icon = Icons.Filled.MusicNote, label = "Sonido", value = "Amanecer Suave")
+            SettingRow(icon = Icons.AutoMirrored.Filled.VolumeUp, label = "Sonido", value = "Amanecer Suave")
             SettingDivider()
-            SettingRow(icon = Icons.AutoMirrored.Filled.VolumeUp, label = "Volumen", value = "Progresivo 0→70%")
+            SettingRow(icon = Icons.Filled.ShowChart, label = "Volumen", value = "Progresivo 0→70%")
             SettingDivider()
             SettingRow(icon = Icons.Filled.Vibration, label = "Vibración", value = "Activada")
             SettingDivider()
-            SettingRow(icon = Icons.Filled.DarkMode, label = "Luz", value = "Luz tenue activada")
+            SettingRow(icon = Icons.Filled.Lightbulb, label = "Luz", value = "Luz tenue activada")
             Spacer(modifier = Modifier.height(16.dp))
             SettingRow(icon = Icons.Filled.Pause, label = "Snooze", value = "2 máximo · 5 min c/u")
         }
@@ -278,7 +281,7 @@ fun DetalleAlarmaScreen(
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
-                        imageVector = Icons.Filled.GraphicEq,
+                        imageVector = Icons.Filled.Psychology,
                         contentDescription = null,
                         tint = AlarmColors.Clock60,
                         modifier = Modifier.size(16.dp)
@@ -305,10 +308,10 @@ fun DetalleAlarmaScreen(
             // Challenge pills
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally)
             ) {
-                ChallengePill(icon = Icons.Filled.Calculate, label = "Mates")
-                ChallengePill(icon = Icons.Filled.CameraAlt, label = "Escaneo")
+                ChallengePill(icon = Icons.Filled.Functions, label = "Mates")
+                ChallengePill(icon = Icons.Filled.QrCode2, label = "Escaneo")
                 ChallengePill(icon = Icons.AutoMirrored.Filled.DirectionsWalk, label = "Caminar")
             }
         }
@@ -415,10 +418,13 @@ fun ChallengePill(
 ) {
     Column(
         modifier = Modifier
+            .width(95.dp)
+            .height(81.dp)
             .clip(RoundedCornerShape(32.dp))
             .background(AlarmColors.Clock60)
             .padding(12.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
         Box(
             modifier = Modifier

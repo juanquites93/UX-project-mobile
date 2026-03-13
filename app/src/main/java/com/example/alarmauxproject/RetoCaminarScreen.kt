@@ -17,10 +17,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Shuffle
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.LoadingIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,6 +32,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun RetoCaminarScreen(
     onCompleted: () -> Unit = {}
@@ -186,29 +188,22 @@ fun RetoCaminarScreen(
                     .clickable { onCompleted() },
                 contentAlignment = Alignment.Center
             ) {
-                Text(
-                    text = "Reto completado",
-                    color = AlarmColors.White,
-                    fontSize = 22.sp,
-                    fontWeight = FontWeight.Normal
-                )
-            }
-
-            // Gear icon on right
-            Box(
-                modifier = Modifier
-                    .size(42.dp)
-                    .align(Alignment.CenterEnd)
-                    .clip(RoundedCornerShape(16.dp))
-                    .background(AlarmColors.White),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.Settings,
-                    contentDescription = "Settings",
-                    tint = AlarmColors.Clock100,
-                    modifier = Modifier.size(24.dp)
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = "Reto completado",
+                        color = AlarmColors.White,
+                        fontSize = 22.sp,
+                        fontWeight = FontWeight.Normal
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    LoadingIndicator(
+                        modifier = Modifier.size(24.dp),
+                        color = AlarmColors.White
+                    )
+                }
             }
         }
 

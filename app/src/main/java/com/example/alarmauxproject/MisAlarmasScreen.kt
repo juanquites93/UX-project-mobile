@@ -22,7 +22,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.BatteryFull
-import androidx.compose.material.icons.filled.Backup
+import androidx.compose.material.icons.filled.CloudDone
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
@@ -60,21 +60,13 @@ fun MisAlarmasScreen(
     var isDeviceStatusExpanded by remember { mutableStateOf(true) }
     val scrollState = rememberScrollState()
 
-    val alarms = if (isDeviceStatusExpanded) {
-        listOf(
-            AlarmData("06:30", "AM", "Lun - Vie", "Perfil: Solo", "Suena en 8h 25 min", true),
-            AlarmData("07:00", "AM", "Sábado", "Perfil: Pareja", "Suena en 2d 9h", true),
-            AlarmData("07:00", "AM", "Sábado", "Perfil: Pareja", "Suena en 2d 9h", true)
-        )
-    } else {
-        listOf(
-            AlarmData("06:30", "AM", "Lun - Vie", "Perfil: Solo", "Suena en 8h 25 min", true),
-            AlarmData("07:00", "AM", "Sabado", "Perfil: Pareja", "Suena en 2d 9h", true),
-            AlarmData("07:50", "AM", "Sabado", "Perfil: Pareja", "Suena en 2d 9h", true),
-            AlarmData("08:00", "AM", "Sabado", "Perfil: Pareja", "Suena en 2d 9h", false),
-            AlarmData("08:30", "AM", "Sabado", "Perfil: Pareja", "Suena en 2d 9h", false)
-        )
-    }
+    val alarms = listOf(
+        AlarmData("06:30", "AM", "Lun - Vie", "Perfil: Solo", "Suena en 8h 25 min", true),
+        AlarmData("07:00", "AM", "Sábado", "Perfil: Pareja", "Suena en 2d 9h", true),
+        AlarmData("07:50", "AM", "Sábado", "Perfil: Pareja", "Suena en 2d 9h", true),
+        AlarmData("08:00", "AM", "Sábado", "Perfil: Pareja", "Suena en 2d 9h", false),
+        AlarmData("08:30", "AM", "Sábado", "Perfil: Pareja", "Suena en 2d 9h", false)
+    )
 
     Column(
         modifier = Modifier
@@ -205,7 +197,7 @@ fun DeviceStatusSection(
                 StatusCard(
                     value = "Activo",
                     label = "Respaldo",
-                    icon = { Icon(Icons.Filled.Backup, contentDescription = null, tint = AlarmColors.Clock80, modifier = Modifier.size(14.dp)) },
+                    icon = { Icon(Icons.Filled.CloudDone, contentDescription = null, tint = AlarmColors.Clock80, modifier = Modifier.size(14.dp)) },
                     modifier = Modifier.weight(1f)
                 )
                 StatusCard(
@@ -231,7 +223,8 @@ fun DeviceStatusSection(
                 Text(
                     text = "Alarmas activas",
                     color = AlarmColors.Clock100,
-                    fontSize = 14.sp
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold
                 )
                 Text(
                     text = "3 activas",
@@ -284,7 +277,8 @@ fun StatusCard(
             Text(
                 text = label,
                 color = AlarmColors.Clock80,
-                fontSize = 14.sp
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Medium
             )
         }
     }
